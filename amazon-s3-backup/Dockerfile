@@ -7,12 +7,25 @@ COPY rootfs /
 
 # Setup base
 RUN apk add --no-cache \
-    python3 \
-    py3-boto3@edge \
-    py3-watchdog \
-    py3-requests
+        python3 \
+        py3-pip \
+    && pip3 install --upgrade pip \
+    && pip3 install \
+        awscli \
+    && rm -rf /var/cache/apk/*
 
-RUN pip install boto3
+# Just to make sure its installed alright
+RUN aws --version
+
+# RUN apk add --no-cache \
+#     python3 \
+#     py3-boto3@edge \
+#     py3-watchdog \
+#     py3-requests
+
+RUN pip3 install boto3
+RUN pip3 install watchdog
+RUN pip3 install requests
 
 # Build arguments
 ARG BUILD_ARCH
