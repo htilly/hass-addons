@@ -1,4 +1,4 @@
-ARG BUILD_FROM=hassioaddons/base:9.2.0
+ARG BUILD_FROM=hassioaddons/base:latest
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -6,26 +6,27 @@ FROM ${BUILD_FROM}
 COPY rootfs /
 
 # Setup base
-# RUN apk add --no-cache \
-#         python3 \
-#         py3-pip \
-#     && pip3 install --upgrade pip \
-#     && pip3 install \
-#         awscli \
-#     && rm -rf /var/cache/apk/*
+RUN apk add --no-cache \
+        python3 \
+        py3-pip \
+    && pip3 install --upgrade pip \
+    && pip3 install \
+        awscli \
+    && rm -rf /var/cache/apk/*
 
 # Just to make sure its installed alright
-# RUN aws --version
+RUN aws --version
 
-RUN apk add --no-cache \
-    python3 \
-    py3-boto3@edge \
-    py3-watchdog \
-    py3-requests
+# RUN apk add --no-cache \
+#     python3 \
+#     py3-pip \
+    # py3-boto3@edge \
+    # py3-watchdog \
+    # py3-requests
 
-# RUN pip3 install boto3
-# RUN pip3 install watchdog
-# RUN pip3 install requests
+RUN pip3 install boto3
+RUN pip3 install watchdog
+RUN pip3 install requests
 
 # Build arguments
 ARG BUILD_ARCH
