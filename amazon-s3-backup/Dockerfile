@@ -12,6 +12,8 @@ RUN apk add --no-cache \
     py3-watchdog \
     py3-requests
 
+RUN pip install boto3
+
 # Build arguments
 ARG BUILD_ARCH
 ARG BUILD_DATE
