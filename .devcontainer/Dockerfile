@@ -18,6 +18,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-transport-https \
     ca-certificates \
     curl \
+    gnupg \
+    lsb-release
+    
+RUN apt-get install -y --no-install-recommends \
     dbus \
     software-properties-common \
     gpg-agent \
